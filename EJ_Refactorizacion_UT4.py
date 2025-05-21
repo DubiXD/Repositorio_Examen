@@ -41,29 +41,43 @@ class Utilidades(Receta):
         for l in lista:
             print(f"* {l}")
 
-    def crear_receta():
-        nombre_receta = input("Que tipo de receta quieres crear?: ")
-        ingredientes_receta = []
-        print("Dime los ingredientes que vas a usar: ")
-        while True:
-            ing = input("")
-            if ing.lower() == "Fin":
-                break
-            ingredientes_receta.append(ing)
-        pasos_receta = []
-        print("Introduce los pasos: ")
-        while True:
-            paso = input("")
-            if paso.lower() == "Fin":
-                break
-            pasos_receta.append(paso)
-        return nombre_receta, ingredientes_receta, pasos_receta
+def crear_receta():
+    nombre_receta = input("Que tipo de receta quieres crear?: ")
+    ingredientes_receta = []
+    print("Dime los ingredientes que vas a usar (Escribe fin para terminar): ")
+    while True:
+        ing = input("")
+        if ing.lower() == "fin":
+            break
+        ingredientes_receta.append(ing)
+    pasos_receta = []
+    print("Introduce los pasos (Escribe fin para terminar): ")
+    while True:
+        paso = input("")
+        if paso.lower() == "fin":
+            break
+        pasos_receta.append(paso)
+    return nombre_receta, ingredientes_receta, pasos_receta
 
 # Función principal
-def principal():
+def principal():        #Hay una incidencia y es que no sale del bulce de la función de crear_receta, posiblemente sea un fallo de ahi
+    
+    nombre_receta, ingredientes_receta, pasos_receta = crear_receta()
+    tipo_receta = input("Que tipo de receta quieres hacer? ")
 
-
-
+    if tipo_receta == "vegetariana":
+        print("== Crear receta (vegetariana) ==")
+        apta_para_veganos = input("Dime si es apta para veganos: ")
+        receta1 = RecetaVegetariana(nombre_receta, ingredientes_receta, pasos_receta, apta_para_veganos)
+        Receta.mostrar(receta1)
+    elif tipo_receta == "no vegetariana":
+        print("== Crear receta (con carne) ==")
+        tipo_carne = input("Indica el tipo de carne: ")
+        receta2 = RecetaNoVegetariana(nombre_receta, ingredientes_receta, pasos_receta, tipo_carne)
+        Receta.mostrar(receta2)
+    else:
+        print("El tipo de receta no existe o no es válido")
+        
 # Ejecutar el programa
 if __name__ == "__main__":
     principal()
