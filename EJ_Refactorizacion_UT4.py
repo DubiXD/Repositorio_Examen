@@ -9,35 +9,27 @@ class Receta(ABC):
 
     @abstractmethod
     def mostrar(self):
-        pass
+        print(f"Receta: {self.nombre}")
+        print("Ingredientes:")
+        for ing in self.ingredientes:
+            print(f"- {ing}")
+        print("Pasos:")
+        for paso in self.pasos:
+            print(f"{paso}")
 
 
 # Clase para recetas vegetarianas
 class RecetaVegetariana(Receta):
-    def mostrar(self):
-        print(f"Receta vegetariana: {self.nombre}")
-        print("Ingredientes:")
-        for ing in self.ingredientes:
-            print(f"- {ing}")
-        print("Pasos:")
-        for paso in self.pasos:
-            print(f"{paso}")
-
+    def __init__(self, nombre, ingredientes, pasos):
+        super().__init__(nombre, ingredientes, pasos)
 
 # Clase para recetas no vegetarianas
 class RecetaNoVegetariana(Receta):
-    def mostrar(self):
-        print(f"Receta NO vegetariana: {self.nombre}")
-        print("Ingredientes:")
-        for ing in self.ingredientes:
-            print(f"- {ing}")
-        print("Pasos:")
-        for paso in self.pasos:
-            print(f"{paso}")
-
+    def __init__(self, nombre, ingredientes, pasos):
+        super().__init__(nombre, ingredientes, pasos)
 
 # Clase con utilidades del restaurante
-class Utilidades:
+class Utilidades(Receta):
     @staticmethod
     def imprimir_receta(receta):
         print("====================================")
